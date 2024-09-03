@@ -7,7 +7,6 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
-using Mono.Cecil;
 using Snap.Core.IO;
 using Snap.Extensions;
 using Snap.Logging;
@@ -50,7 +49,6 @@ internal interface ISnapFilesystem
     FileStream FileRead(string fileName, int bufferSize = 8196, bool useAsync = true);
     FileStream FileReadWrite(string fileName, bool overwrite = true);
     FileStream FileWrite(string fileName, bool overwrite = true);
-    Task<AssemblyDefinition> FileReadAssemblyDefinitionAsync(string filename, CancellationToken cancellationToken);
     bool FileExists(string fileName);
     void FileExistsThrowIfNotExists(string fileName);
     FileInfo FileStat(string fileName);
@@ -150,19 +148,6 @@ internal sealed class SnapFilesystem : ISnapFilesystem
             fileStream.SetLength(0);
         }
         return fileStream;
-    }
-
-    public async Task<AssemblyDefinition> FileReadAssemblyDefinitionAsync([NotNull] string filename, CancellationToken cancellationToken)
-    {
-        if (filename == null) throw new ArgumentNullException(nameof(filename));
-
-        if (!FileExists(filename))
-        {
-            throw new FileNotFoundException(filename);
-        }
-
-        var srcStream = await FileReadAsync(filename, cancellationToken);
-        return AssemblyDefinition.ReadAssembly(srcStream);
     }
 
     public bool FileExists([NotNull] string fileName)

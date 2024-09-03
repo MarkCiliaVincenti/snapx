@@ -299,15 +299,15 @@ internal sealed class SnapInstaller(
             }
         }
 
-        var snapAppDllAbsolutePath = _snapOs.Filesystem.PathCombine(appDirectory, SnapConstants.SnapAppDllFilename);
+        var snapAppDllAbsolutePath = _snapOs.Filesystem.PathCombine(appDirectory, SnapConstants.SnapAppYamlFilename);
 
         try
         {
             logger?.Info($"Updating {snapAppDllAbsolutePath}. Current channel is: {snapChannel.Name}.");
 
-            using var snapAppDllAssemblyDefinition = _snapAppWriter.BuildSnapAppAssembly(snapApp);
+            using var snapAppYamlStream = _snapAppWriter.BuildSnapApp(snapApp);
             await using var snapAPpDllDestinationStream = _snapOs.Filesystem.FileWrite(snapAppDllAbsolutePath);
-            snapAppDllAssemblyDefinition.Write(snapAPpDllDestinationStream);
+            await snapAppYamlStream.CopyToAsync(snapAPpDllDestinationStream, cancellationToken);
         }
         catch(Exception e)
         {
