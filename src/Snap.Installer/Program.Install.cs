@@ -92,7 +92,7 @@ internal partial class Program
             diskLogger.Debug($"{nameof(environment.Io.WorkingDirectory)}: {environment.Io.WorkingDirectory}");
             diskLogger.Debug($"{nameof(environment.Io.ThisExeWorkingDirectory)}: {environment.Io.ThisExeWorkingDirectory}");
 
-            var snapAppDllAbsolutePath = snapFilesystem.PathCombine(environment.Io.ThisExeWorkingDirectory, SnapConstants.SnapAppDllFilename);
+            var snapAppDllAbsolutePath = snapFilesystem.PathCombine(environment.Io.ThisExeWorkingDirectory, SnapConstants.SnapAppYamlFilename);
             diskLogger.Debug($"{nameof(snapAppDllAbsolutePath)}: {snapAppDllAbsolutePath}.");
 
             if (!snapFilesystem.FileExists(snapAppDllAbsolutePath))
@@ -110,7 +110,7 @@ internal partial class Program
             }
             catch (Exception ex)
             {
-                mainWindowLogger.ErrorException($"Error reading {SnapConstants.SnapAppDllFilename}", ex);
+                mainWindowLogger.ErrorException($"Error reading {SnapConstants.SnapAppYamlFilename}", ex);
                 goto done;
             }
 
