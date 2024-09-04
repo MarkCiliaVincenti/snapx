@@ -20,7 +20,7 @@
     <PackageVersion Include="Mono.Cecil" Version="0.11.5" />
     <PackageVersion Include="Moq" Version="4.20.71" />
     <PackageVersion Include="NLog" Version="5.3.3" />
-    <PackageVersion Include="NuGet.Packaging.Core" Version="6.9.1" />
+    <PackageVersion Include="NuGet.Packaging" Version="6.11.0" />
     <PackageVersion Include="NuGet.Protocol" Version="6.11.0" />
     <PackageVersion Include="SharpCompress" Version="0.38.0" />
     <PackageVersion Include="System.CodeDom" Version="8.0.0" />
