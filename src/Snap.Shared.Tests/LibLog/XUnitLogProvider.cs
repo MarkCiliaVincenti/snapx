@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using JetBrains.Annotations;
 using Snap.Logging;
 using Xunit.Abstractions;
@@ -9,7 +10,7 @@ namespace Snap.Shared.Tests.LibLog;
 
 public static class LogHelper
 {
-    static readonly object _initLock = new();
+    static readonly Lock _initLock = new();
     static bool _initialized;
     static readonly XUnitLogProvider LogProvider;
 

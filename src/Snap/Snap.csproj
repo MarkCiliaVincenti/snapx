@@ -18,6 +18,10 @@
         <Description>Snapx support library. This library should be installed into your Console/WPF/Winforms/Avalonia project.</Description>
     </PropertyGroup>
 
+    <ItemGroup Condition="!$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net9.0'))">
+        <PackageReference Include="Backport.System.Threading.Lock" />
+    </ItemGroup>    
+
     <ItemGroup>
         <PackageReference Include="LibLog">
             <PrivateAssets>all</PrivateAssets>

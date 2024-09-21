@@ -18,7 +18,7 @@ namespace Snap.Core;
 public static class Snapx
 {
     static readonly ILog Logger;
-    static readonly object SyncRoot = new();
+    static readonly Lock SyncRoot = new();
     // ReSharper disable once InconsistentNaming
     internal static SnapApp _current;        
     internal static ISnapOs SnapOs { get; set; }
